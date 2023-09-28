@@ -12,6 +12,7 @@ fun main() {
     Database.connect(
         "jdbc:postgresql://localhost:5432/playzone",
         driver = "org.postgresql.Driver",
+        user = "postgres",
         password = "Sa135244"
     )
 
@@ -24,5 +25,5 @@ fun main() {
 }
 
 
-//      1:00:45
+//      1:20:20
 //      https://www.youtube.com/watch?v=LqaBXrRkhC0&list=WL&index=17&t=1505s
