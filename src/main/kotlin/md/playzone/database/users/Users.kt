@@ -24,13 +24,15 @@ object Users: Table() {
 
     fun fetchUser(login: String): UserDTO? {
         return try {
-            val userModel = Users.select { Users.login.eq(login) }.single()
-            UserDTO(
-                login = userModel[Users.login],
-                password = userModel[password],
-                username = userModel[username],
-                email = userModel[email]
-            )
+            transaction {
+                val userModel = Users.select { Users.login.eq(login) }.single()
+                UserDTO(
+                    login = userModel[Users.login],
+                    password = userModel[password],
+                    username = userModel[username],
+                    email = userModel[email]
+                )
+            }
         } catch (e: Exception){
             null
         }
