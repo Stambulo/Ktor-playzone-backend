@@ -2,6 +2,7 @@ package md.playzone
 
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
+import md.playzone.features.games.configureGamesRouting
 import md.playzone.features.login.configureLoginRouting
 import md.playzone.features.register.configureRegisterRouting
 import md.playzone.plugins.configureRouting
@@ -20,10 +21,12 @@ fun main() {
         configureRouting()
         configureLoginRouting()
         configureRegisterRouting()
+        configureGamesRouting()
         configureSerialization()
     }.start(wait = true)
 }
 
 
-//      1:23:00
+//      + 2 tables
+//      1:45:50
 //      https://www.youtube.com/watch?v=LqaBXrRkhC0&list=WL&index=17&t=1505s
