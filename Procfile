@@ -1,0 +1,1 @@
+web: ./build/install/md.playzone.playzone-backend/bin/md.playzone.playzone-backend
