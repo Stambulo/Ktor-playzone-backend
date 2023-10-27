@@ -2,6 +2,7 @@ package md.playzone
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import md.playzone.features.games.configureGamesRouting
@@ -12,17 +13,23 @@ import md.playzone.plugins.configureSerialization
 import org.jetbrains.exposed.sql.Database
 
 fun main() {
-    val config = HikariConfig("hikari.properties")
+    val config = HikariConfig("/hikari.properties")
     val dataSource = HikariDataSource(config)
     Database.connect(dataSource)
 
-    embeddedServer(Netty, port = System.getenv("PORT").toInt()) {
-        configureRouting()
-        configureLoginRouting()
-        configureRegisterRouting()
-        configureGamesRouting()
-        configureSerialization()
-    }.start(wait = true)
+    embeddedServer(
+        Netty,
+        port = System.getenv("SERVER_PORT").toInt(),
+        module = Application::playzoneModule
+        ).start(wait = true)
+}
+
+fun Application.playzoneModule() {
+    configureRouting()
+    configureLoginRouting()
+    configureRegisterRouting()
+    configureGamesRouting()
+    configureSerialization()
 }
 
 
